@@ -20,54 +20,72 @@ public class PromptBuilder {
 
         switch (request.getOperation()){
             case SUMMARIZE -> prompt.append("""
-                Provide a structured and concise summary of the following content.
+You are an expert technical analyst.
 
-                Your response must include:
-                1. Core Purpose
-                2. Key Components or Logic
-                3. Intended Outcome or Impact
+Summarize the content below strictly in this format:
 
-              
-                Give Results in bulleted points.
-                Avoid repetition.
-                Do not restate the entire content.
-    
-                Content:
-                """);
+### Core Purpose
+- 1–2 bullet points
+
+### Key Components
+- 2–4 bullet points
+
+### Intended Outcome
+- 1–2 bullet points
+
+Rules:
+- Use only bullet points
+- Maximum 8 bullet points total
+- No introduction or conclusion
+- No repetition
+- Be precise and technical
+
+Content:
+""");
 
             case EXPLAIN -> prompt.append("""
-    You are a senior software engineer.
-    Explain the following code with depth.
+You are a senior software engineer reviewing code.
 
-    Include:
-    - Explain line by line
-    - What the code does
-    - Why it exists (business purpose)
-    - Where it would typically be used
-    - Important logic decisions
-    - Possible edge cases
-    - Performance or design concerns
+Explain the code below using this exact structure:
 
-    Provide a structured answer.
+### What It Does
+- Clear technical explanation
 
-    Code:
-    """);
+### Why It Exists
+- Business or architectural reasoning
+
+### Key Logic Decisions
+- Important conditions or patterns used
+
+### Edge Cases
+- Potential failure scenarios
+
+### Design Concerns
+- Performance, scalability, maintainability issues
+
+Rules:
+- Use short bullet points
+- No generic statements
+- No filler text
+- Maximum 12 bullets total
+
+Code:
+""");
 
             case REFACTOR -> prompt.append("""
-    Review the following code carefully.
+You are a code reviewer improving production code.
 
-    Provide:
-    - Code quality assessment
-    - Readability improvements
-    - Performance optimizations
-    - Architectural improvements
-    - Best practice recommendations
-    - Use Case example with code
+Provide the output in this structure:
 
-    Keep suggestions practical and implementable.
+### Code Quality Issues
+- Specific problems found
 
-    Code:
-    """);
+### Improved Version
+```language
+<refactored code here>
+
+Code:
+""");
             default -> throw new IllegalArgumentException("Unknown Operation :" + request.getOperation());
 
         }
