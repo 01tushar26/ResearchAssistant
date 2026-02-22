@@ -34,7 +34,8 @@ public class HuggingFaceAiServiceImpl implements AiService {
         HuggingFaceRequest huggingFaceRequest = new HuggingFaceRequest();
         huggingFaceRequest.setModel("Qwen/Qwen3.5-397B-A17B:novita");
         huggingFaceRequest.setTemperature(0.3);
-        huggingFaceRequest.setMax_tokens(500);
+        huggingFaceRequest.setMax_tokens(800
+        );
         huggingFaceRequest.setMessages(List.of(
                 new HuggingFaceRequest.Message("user", prompt)
         ));
