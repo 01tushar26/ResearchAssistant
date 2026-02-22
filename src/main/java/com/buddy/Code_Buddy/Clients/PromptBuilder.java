@@ -1,54 +1,13 @@
 package com.buddy.Code_Buddy.Clients;
 
-import com.buddy.Code_Buddy.DTO.OlamaModelRequest;
-import com.buddy.Code_Buddy.DTO.OlamaModelResponse;
 import com.buddy.Code_Buddy.DTO.ResearchRequest;
-import com.buddy.Code_Buddy.Exceptions.ResourceNotFoundException;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
-import org.springframework.web.client.RestClient;
 
-@Service
-@RequiredArgsConstructor
+@Component
 @Slf4j
-public class AiServiceImpl implements AiService{
-
-    private final RestClient restClient;
-
-    @Override
-    public String generate(ResearchRequest request) {
-
-        log.info("Generating the response for your request {}",request);
-
-        String prompt = buildPrompt(request);
-
-        //Making the request body correspond to the model we use
-        OlamaModelRequest olamaModelRequest = new OlamaModelRequest(
-                "qwen2.5-coder:3b",
-                prompt,
-                false
-        );
-
-        //Generating the response
-
-        OlamaModelResponse response = restClient.post()
-                .uri("/api/generate")
-                .body(olamaModelRequest)
-                .retrieve()
-                .body(OlamaModelResponse.class);
-
-        if(response == null || response.getResponse() == null){
-            throw  new ResourceNotFoundException("Olama Response is empty");
-        }
-
-
-
-        return response.getResponse();
-    }
-
-    @Override
+public class PromptBuilder {
     public String buildPrompt(ResearchRequest request) {
         log.info("Building prompt for request {}",request);
         if(request.getOperation() == null || request.getContent() == null){
@@ -68,7 +27,8 @@ public class AiServiceImpl implements AiService{
                 2. Key Components or Logic
                 3. Intended Outcome or Impact
 
-                keep it under 6 lines.
+              
+                Give Results in bulleted points.
                 Avoid repetition.
                 Do not restate the entire content.
     
@@ -80,6 +40,7 @@ public class AiServiceImpl implements AiService{
     Explain the following code with depth.
 
     Include:
+    - Explain line by line
     - What the code does
     - Why it exists (business purpose)
     - Where it would typically be used
@@ -101,6 +62,7 @@ public class AiServiceImpl implements AiService{
     - Performance optimizations
     - Architectural improvements
     - Best practice recommendations
+    - Use Case example with code
 
     Keep suggestions practical and implementable.
 
@@ -111,6 +73,6 @@ public class AiServiceImpl implements AiService{
         }
         prompt.append("\n\n");
         prompt.append(request.getContent());
-            return prompt.toString();
-        }
+        return prompt.toString();
     }
+}
