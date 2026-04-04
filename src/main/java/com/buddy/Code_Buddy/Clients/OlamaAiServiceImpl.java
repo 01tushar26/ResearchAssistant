@@ -42,7 +42,7 @@ public class OlamaAiServiceImpl implements AiService{
                 .body(OlamaModelResponse.class);
 
         if(response == null || response.getResponse() == null){
-            throw  new ResourceNotFoundException("Olama Response is empty");
+            throw  new ResourceNotFoundException("Ollama Response is empty");
         }
 
 

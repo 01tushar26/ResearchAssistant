@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/research")
-//this will allow it to acces from the frontend
+//this will allow it to access from the frontend
 @CrossOrigin("*")
 @RequiredArgsConstructor
 public class ResearchController {
