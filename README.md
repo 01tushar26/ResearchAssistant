@@ -99,41 +99,37 @@ Spring Profiles handle the provider switch cleanly. `OlamaAiServiceImpl` is acti
 ```
 Code-Buddy/
 │
-├── src/main/java/com/buddy/Code_Buddy/
-│   │
-│   ├── Controller/
-│   │   └── ResearchController.java          # Exposes POST /research/process
-│   │
-│   ├── Clients/
-│   │   ├── AiService.java                   # Interface with a single generate() method
-│   │   ├── OlamaAiServiceImpl.java          # Ollama implementation, active on dev profile
-│   │   ├── HuggingFaceAiServiceImpl.java    # HuggingFace implementation, active on prod profile
-│   │   └── PromptBuilder.java               # Builds the prompt string based on operation
-│   │
-│   ├── DTO/
-│   │   ├── ResearchRequest.java             # Inbound payload: content + operation enum
-│   │   ├── OlamaModelRequest.java           # Request shape for Ollama's /api/generate
-│   │   ├── OlamaModelResponse.java          # Response shape from Ollama
-│   │   ├── HuggingFaceRequest.java          # Request shape for HuggingFace chat completions
-│   │   └── HuggingFaceResponse.java         # Response shape from HuggingFace
-│   │
-│   ├── Advice/
-│   │   ├── ApiError.java                    # Error detail model
-│   │   ├── ApiResponse.java                 # Generic response wrapper used across endpoints
-│   │   └── GlobalExceptionHandler.java      # Catches and formats all exceptions consistently
-│   │
-│   └── Configurations/
-│       └── RestConfig.java                  # Declares the RestClient bean with a base URL
-│
-└── chrome-extension/
-    ├── manifest.json      # Extension configuration and permissions
-    ├── background.js      # Service worker that registers the side panel behavior
-    ├── sidePanel.html     # Extension UI markup
-    ├── sidePanel.js       # Handles user interactions, API calls, and note persistence
-    └── sidePanel.css      # Styles for the side panel
+└── src/main/java/com/buddy/Code_Buddy/
+   │
+   ├── Controller/
+   │   └── ResearchController.java          # Exposes POST /research/process
+   │
+   ├── Clients/
+   │   ├── AiService.java                   # Interface with a single generate() method
+   │   ├── OlamaAiServiceImpl.java          # Ollama implementation, active on dev profile
+   │   ├── HuggingFaceAiServiceImpl.java    # HuggingFace implementation, active on prod profile
+   │   └── PromptBuilder.java               # Builds the prompt string based on operation
+   │
+   ├── DTO/
+   │   ├── ResearchRequest.java             # Inbound payload: content + operation enum
+   │   ├── OlamaModelRequest.java           # Request shape for Ollama's /api/generate
+   │   ├── OlamaModelResponse.java          # Response shape from Ollama
+   │   ├── HuggingFaceRequest.java          # Request shape for HuggingFace chat completions
+   │   └── HuggingFaceResponse.java         # Response shape from HuggingFace
+   │
+   ├── Advice/
+   │   ├── ApiError.java                    # Error detail model
+   │   ├── ApiResponse.java                 # Generic response wrapper used across endpoints
+   │   └── GlobalExceptionHandler.java      # Catches and formats all exceptions consistently
+   │
+   └── Configurations/
+       └── RestConfig.java                  # Declares the RestClient bean with a base URL
+
+
 ```
 
 ---
+### [Link for Extension Repo](https://github.com/01tushar26/ResearchAssistant-Extension)
 
 ## Getting Started
 
